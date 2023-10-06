@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 def show_home_page(request):
@@ -10,23 +10,23 @@ def show_about(request):
 
 
 def show_article(request, article):
-    return HttpResponse("Article")
+    return HttpResponse(f"Article #{article}")
 
 
 def add_comment(request, article):
-    return HttpResponse("Comment")
+    return HttpResponse(f"Add comment to article #{article}")
 
 
 def create_article(request):
-    return HttpResponse("Create")
+    return HttpResponse("Create article")
 
 
 def update_article(request, article):
-    return HttpResponse("Update")
+    return HttpResponse(f"Update article #{article}")
 
 
 def delete_article(request, article):
-    return HttpResponse("Delete")
+    return HttpResponse(f"Delete article #{article}")
 
 
 def show_topics(request):
@@ -34,15 +34,15 @@ def show_topics(request):
 
 
 def subscribe_topic(request, topic):
-    return HttpResponse("Subscribe")
+    return HttpResponse(f"Subscribe to topic #{topic}")
 
 
 def unsubscribe_topic(request, topic):
-    return HttpResponse("Unsubscribe")
+    return HttpResponse(f"Unsubscribe from topic #{topic}")
 
 
-def user_profile(request, username):
-    return HttpResponse("User profile")
+def show_user_profile(request, username):
+    return HttpResponse(f"{username}'s profile")
 
 
 def set_password(request):
@@ -67,3 +67,10 @@ def login(request):
 
 def logout(request):
     return HttpResponse("Logout")
+
+
+def show_archive(request, year, month):
+    if 0 < int(year) <= 2023 and 0 < int(month) <= 12:
+        return HttpResponse(f"Year: {int(year)}, Month: {int(month)}")
+    # return HttpResponse("Incorrect date")
+    return HttpResponseNotFound("Not Found")
