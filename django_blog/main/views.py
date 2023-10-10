@@ -1,36 +1,44 @@
+from random import randint
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseNotFound
+from django.urls import reverse
 
 
 def show_home_page(request):
-    return HttpResponse("Home page")
+    return render(request, 'main/home_page.html')
 
 
 def show_about(request):
-    return HttpResponse("Simple text")
+    return render(request, 'main/about.html')
 
 
-def show_article(request, article):
-    return HttpResponse(f"Article #{article}")
+def article(request):
+    article_id = randint(1, 100)
+    return redirect(f'/article/{article_id}')
 
 
-def add_comment(request, article):
-    return HttpResponse(f"Add comment to article #{article}")
+def show_article(request, article_id):
+    return render(request, 'main/post/article.html', {"id": article_id})
+
+
+def add_comment(request, article_id):
+    return render(request, 'main/post/add_comment.html')
 
 
 def create_article(request):
-    return HttpResponse("Create article")
+    return render(request, 'main/post/create_article.html')
 
 
-def update_article(request, article):
-    return HttpResponse(f"Update article #{article}")
+def update_article(request, article_id):
+    return render(request, 'main/post/update_article.html')
 
 
-def delete_article(request, article):
-    return HttpResponse(f"Delete article #{article}")
+def delete_article(request, article_id):
+    return render(request, 'main/post/delete_article.html')
 
 
 def show_topics(request):
-    return HttpResponse("Topics")
+    return render(request, 'main/topic/topic_list.html')
 
 
 def subscribe_topic(request, topic):
@@ -54,23 +62,22 @@ def set_userdata(request):
 
 
 def deactivate_account(request):
-    return HttpResponse("Deactivate account")
+    return render(request, 'main/user/deactivate_account.html')
 
 
 def register_account(request):
-    return HttpResponse("Register account")
+    return render(request, 'main/user/register_account.html')
 
 
 def login(request):
-    return HttpResponse("Login")
+    return render(request, 'main/user/login.html')
 
 
 def logout(request):
-    return HttpResponse("Logout")
+    return render(request, 'main/user/logout.html')
 
 
 def show_archive(request, year, month):
     if 0 < int(year) <= 2023 and 0 < int(month) <= 12:
         return HttpResponse(f"Year: {int(year)}, Month: {int(month)}")
-    # return HttpResponse("Incorrect date")
     return HttpResponseNotFound("Not Found")

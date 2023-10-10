@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- {% load static %} -->
+
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- <link href="{% static " css/blog.css" %}" rel="stylesheet"> -->
+    <link href="../../static/css/blog.css" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <h1>Django Blog</h1>
+    <div class='nav-container'>
+        <a class='nav-link' href="{% url 'home_page' %}">Home</a>
+        <a class='nav-link' href="{% url 'about' %}">About</a>
+        <a class='nav-link' href="{% url 'article' %}">Articles</a>
+        <a class='nav-link' href="{% url 'login' %}">Login</a>
+        <a class='nav-link' href="{% url 'register' %}">Register</a>
+        <span class='nav-link'></span>
+    </div>
+</header>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- <div id="sidebar">
+    <h2>Links:</h2>
+    <nav>
+        <ul>
+            sidebar
+        </ul>
+    </nav>
+</div> -->
+</body>
+</html>
