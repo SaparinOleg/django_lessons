@@ -1,5 +1,23 @@
 from django.urls import path, re_path
-from .views import *
+from .views import (
+    add_comment,
+    article,
+    create_article,
+    show_home_page,
+    show_about,
+    set_password,
+    deactivate_account,
+    register_account,
+    login,
+    logout,
+    show_topics,
+    subscribe_topic,
+    unsubscribe_topic,
+    show_user_profile,
+    show_article,
+    update_article,
+    delete_article,
+    show_archive)
 
 urlpatterns = [
     path('', show_home_page),
