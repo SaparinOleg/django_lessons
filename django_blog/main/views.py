@@ -2,6 +2,11 @@ from random import randint
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
+from http import HTTPStatus
+
+
+def teapot(request):
+    return render(request, 'main/teapot.html', status=HTTPStatus.IM_A_TEAPOT)
 
 
 def show_home_page(request):

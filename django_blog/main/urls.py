@@ -17,7 +17,9 @@ from .views import (
     show_article,
     update_article,
     delete_article,
-    show_archive)
+    show_archive,
+    teapot,
+    )
 
 urlpatterns = [
     path('', show_home_page, name='home_page'),
@@ -37,5 +39,6 @@ urlpatterns = [
     path('<int:article_id>/comment/', add_comment, name='add_comment'),
     path('<int:article_id>/update/', update_article, name='update'),
     path('<int:article_id>/delete/', delete_article, name='delete'),
-    re_path(r'^archive/(?P<year>\d{4})/(?P<month>\d{1,2})/', show_archive, name='archive')
+    re_path(r'^archive/(?P<year>\d{4})/(?P<month>\d{1,2})/$', show_archive, name='archive'),
+    re_path(r'^.*/$', teapot),
 ]

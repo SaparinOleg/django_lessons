@@ -1,0 +1,1 @@
+py ./django_blog/manage.py runserver
