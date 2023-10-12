@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+
+{% block title %} Article {% endblock %}
+{% block content %}
+<div>
+    Article - #{{ id }}
+    {% lorem 5 p random %}
+</div>
+{% endblock %}

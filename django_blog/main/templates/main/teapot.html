@@ -1,0 +1,18 @@
+{% load static %}
+
+<html>
+
+<head>
+    <title>I'm a teapot</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    {% block content %}
+    <div class="align-center-container" class="teapot">
+        <img src="{% static 'img/teapot.jpg' %}" alt="no image" />
+    </div>
+    {% endblock %}
+</body>
+
+</html>
