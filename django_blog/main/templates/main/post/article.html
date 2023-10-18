@@ -2,8 +2,41 @@
 
 {% block title %} Article {% endblock %}
 {% block content %}
+
+    {% for topic in topics %}
+        {% if forloop.counter != 1 %} | {% endif %}
+        <a class="remove-link-style" href="{{ topic.get_absolute_url }}">
+            {{ topic }}
+        </a>
+    {% endfor %}
+
 <div>
-    Article - #{{ id }}
-    {% lorem 5 p random %}
+    <h2>
+    {{ article.title }} #{{ article.pk }}
+    </h2>
+    <br>
+    {{ article.content|linebreaksbr }}
+</div>
+<br>
+
+
+<div class="comments-title"> Comments: </div>
+<div class="comments-container">
+    {% for comment in comments %}
+        <div class="comment-block">
+            <div class="comment-avatar">
+                <div class="comment-letter">A</div>
+            </div>
+            <div class="comment-group-padding">
+                <div class="comment-author-date">
+                    <span class="comment-author"> {{ comment.author }} </span>
+                    <span class="comment-date"> {{ comment.created }} </span>
+                </div>
+            <div class="comment-contents">
+                {{ comment.message }}
+            </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

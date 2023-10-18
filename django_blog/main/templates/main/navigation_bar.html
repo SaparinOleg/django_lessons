@@ -1,0 +1,11 @@
+
+{% block content %}
+<div class='nav-container'>
+    <a class='nav-link-button remove-link-style {% if page_name == "home" %} active {% endif %}' href="{% url 'main:home_page' %}"><span>Home</span></a>
+    <a class='nav-link-button remove-link-style {% if page_name == "about" %} active {% endif %}' href="{% url 'main:about' %}">About</a>
+    <a class='nav-link-button remove-link-style {% if page_name == "article" %} active {% endif %}' href="{% url 'main:random_article' %}">Articles</a>
+    <a class='nav-link-button remove-link-style {% if page_name == "login" %} active {% endif %}' href="{% url 'main:login' %}">Login</a>
+    <a class='nav-link-button remove-link-style {% if page_name == "register" %} active {% endif %}' href="{% url 'main:register' %}">Register</a>
+    <span class='nav-link-button'></span>
+</div>
+{% endblock %}

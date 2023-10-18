@@ -2,7 +2,14 @@
 
 {% block title %} Home page {% endblock %}
 {% block content %}
-<p>
-    Welcome to my first web-site
-</p>
+
+<div>
+    {% for topic in topics %}
+        {% if forloop.counter != 1 %} | {% endif %}
+        <a class="remove-link-style" href="{{ topic.get_absolute_url }}">
+            {{ topic }}
+        </a>
+    {% endfor %}
+    {% include "main/post/article_list.html" %}
+</div>
 {% endblock %}

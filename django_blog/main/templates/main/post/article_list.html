@@ -1,0 +1,58 @@
+{% block content %}
+<div class="articles-container">
+    <div class="articles-column">
+        {% for article in articles %}
+        <div class="article-card">
+            <div class="article-title">
+                <a class="remove-link-style" href="{{ article.get_absolute_url }}">
+                    {{ article.title }} #{{ article.pk }}
+                </a>
+            </div>
+                <div class="article-contents">
+                    {{ article.content|truncatewords:60 }}
+                </div>
+                <div class="article-published">
+                    By <span class="author"> {{ article.author }} </span> published {{ article.created }}
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="articles-column">
+        {% for article in articles %}
+        <div class="article-card">
+            <div class="article-title">
+                <a class="remove-link-style" href="{{ article.get_absolute_url }}">
+                    {{ article.title }} #{{ article.pk }}
+                </a>
+            </div>
+                <div class="article-contents">
+                    {{ article.content|truncatewords:55 }}
+                </div>
+                <div class="article-published">
+                    By <span class="author"> {{ article.author }} </span> published {{ article.created }}
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="articles-column">
+        {% for article in articles %}
+        <div class="article-card">
+            <div class="article-title">
+                <a class="remove-link-style" href="{{ article.get_absolute_url }}">
+                    {{ article.title }} #{{ article.pk }}
+                </a>
+            </div>
+                <div class="article-contents">
+                    {{ article.content|truncatewords:70 }}
+                </div>
+                <div class="article-published">
+                    By <span class="author"> {{ article.author }} </span> published {{ article.created }}
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

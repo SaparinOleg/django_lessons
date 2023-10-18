@@ -1,8 +1,11 @@
-from random import randint
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, HttpResponseNotFound
-from django.urls import reverse
+# from django.urls import reverse
 from http import HTTPStatus
+from random import choice as rnd_choice
+from django.core.exceptions import ObjectDoesNotExist
+
+from .models import Article, Comment, Topic
 
 
 def teapot(request):
@@ -10,20 +13,33 @@ def teapot(request):
 
 
 def show_home_page(request):
-    return render(request, 'main/home_page.html')
+    articles = Article.objects.all()
+    topics = Topic.objects.all()
+    return render(request,
+                  'main/home_page.html',
+                  {'articles': articles, 'topics': topics, 'page_name': 'home'})
 
 
 def show_about(request):
-    return render(request, 'main/about.html')
+    return render(request, 'main/about.html', {'page_name': 'about'})
 
 
-def article(request):
-    article_id = randint(1, 100)
+def random_article(request):
+    article_id = rnd_choice(Article.objects.all()).pk
     return redirect(f'/article/{article_id}')
 
 
 def show_article(request, article_id):
-    return render(request, 'main/post/article.html', {"id": article_id})
+    # article = get_object_or_404(Article, pk=article_id)
+    try:
+        article = Article.objects.get(pk=article_id)
+        comments = Comment.objects.filter(article=article_id)
+        topics = article.topics.all()
+        return render(request,
+                      'main/post/article.html',
+                      {'article': article, 'comments': comments, 'topics': topics, 'page_name': 'article'})
+    except ObjectDoesNotExist:
+        return redirect(f'does_not_exist/')
 
 
 def add_comment(request, article_id):
@@ -42,8 +58,16 @@ def delete_article(request, article_id):
     return render(request, 'main/post/delete_article.html')
 
 
-def show_topics(request):
-    return render(request, 'main/topic/topic_list.html')
+def show_topic(request, topic_id):
+    # topic = get_object_or_404(Topic, pk=topic_id)
+    try:
+        topic = Topic.objects.get(pk=topic_id)
+        articles = topic.articles.all()
+        return render(request,
+                      'main/topics/topic.html',
+                      {'topic': topic, 'articles': articles})
+    except ObjectDoesNotExist:
+        return redirect(f'does_not_exist/')
 
 
 def subscribe_topic(request, topic):
@@ -71,11 +95,11 @@ def deactivate_account(request):
 
 
 def register_account(request):
-    return render(request, 'main/user/register_account.html')
+    return render(request, 'main/user/register_account.html', {'page_name': 'register'})
 
 
 def login(request):
-    return render(request, 'main/user/login.html')
+    return render(request, 'main/user/login.html', {'page_name': 'login'})
 
 
 def logout(request):

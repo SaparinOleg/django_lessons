@@ -1,46 +1,200 @@
+@font-face {
+    font-family: 'BungeeSpice';
+    src: url(/static/font/BungeeSpice-Regular.ttf) format("truetype");
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #1d2021;
+    color: rgb(197, 194, 194);
+}
+
 h1 {
+    font-size: xx-large;
     font-weight: normal;
+    font-style: oblique;
     border-bottom: 1px solid #bbb;
     padding: 0 0 10px 0;
 }
 
 h2 {
-    font-weight: normal;
-    margin: 30px 0 0;
+    color: rgb(108, 159, 176);
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 5px; 
+}
+
+.remove-link-style {
+    color: white;
+    text-decoration: none;
+    border: none;
 }
 
 .nav-container {
     display: flex;
     margin: 10px 0px 20px 0px;
+}
+
+.nav-link-button {
+    display: block;
+    padding: 10px 10px 10px 10px;
+    border-bottom: solid 5px #008234;
+    text-decoration: none;
+    background-color: #203c5d;
+    min-width: max-content;
+    transition: all 500ms;
+    /* font-family: 'BungeeSpice'; */
+}
+
+.nav-link-button span {
     filter: hue-rotate(150deg);
 }
 
-.nav-link {
-    display: block;
-    padding: 10px 10px 10px 10px;
-    border-bottom: solid 5px brown;
-    color: black;
-    text-decoration: none;
-    background-color: beige;
-    min-width: max-content;
-    transition: all 500ms;
-}
-
-.nav-link:last-child {
+.nav-link-button:last-child {
     flex: 1 1 100%;
 }
 
-.nav-link:not(:last-child):not(.active):hover {
-    background-color: burlywood;
-    border-bottom: solid 5px maroon;
-    color: black;
+.nav-link-button:not(:last-child):not(.active):hover {
+    background-color: #3d638f;
+    border-bottom: solid 5px #05622a;
 }
 
-.nav-link.active {
+.nav-link-button.active {
     font-weight: bold;
-    background-color: sienna;
+    background-color: #5e87b6;
     color: antiquewhite;
-    border-bottom: solid 5px rgb(68, 27, 0);
+    border-bottom: solid 5px #174d2d;
+}
+
+.articles-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.articles-column {
+    flex: 1 1 0%;
+    margin: 5px;
+    padding: 5px;
+    min-width: 200px;
+}
+
+.article-card {
+    background-color: #202425;
+    border: solid 1px #1a1d1e;
+    border-radius: 5px;
+    flex: 1 1 0%;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px 5px #bbb;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: inset 0px 110px 50px -100px #1f5e99, 3px -1px 10px 1px #00000059;
+}
+
+.article-title {
+    font-size: 25px;
+    color: #6c9fb0;
+    margin-bottom: 15px;
+}
+
+.article-title a {
+    color: #6c9fb0;
+}
+
+.article-contents {
+    padding: auto;
+}
+
+.article-published {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.comments-title {
+    font-size: xx-large;
+    margin-top: 2rem;
+    margin-bottom: 5px;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-block {
+    border-bottom: dashed 1px #444;
+    margin: 5px 0;
+    padding: 5px 5px 15px 5px;
+}
+
+.comment-group-padding {
+    padding-left: 45px;
+}
+
+.comment-avatar {
+    border: solid 2px rgb(1, 99, 1);
+    overflow: hidden;
+    padding: 0px 0px 0 0;
+    background-color: #008234;
+    color: white;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.comment-letter {
+    text-shadow: 1px 0 0 rgb(1, 99, 1), 0 -1px 0 rgb(1, 99, 1), 0 1px 0 rgb(1, 99, 1), -1px 0 0 rgb(1, 99, 1);
+    cursor: default;
+    margin: 2px 0px 0 8px;
+    font-family: sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.comment-author {
+    color: white;
+    font-weight: bolder;
+}
+
+.comment-date {
+    color: gray;
+    font-size: smaller;
+    margin-left: 5px;
+}
+
+.comment-author-date {
+    margin-bottom: 5px;
+}
+
+.date {
+    color: red;
+}
+
+.author {
+    color: #6b8db4;
+}
+
+.comments_title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.published {
+    font-size: 12px;
+    font-weight: lighter;   
+    font-style: italic;
+    text-indent: 5px;
+    color: burlywood;
+    border-bottom: solid 1px brown;
+}
+
+.commented {
+    font-size: 12px;
+    font-weight: lighter;   
+    font-style: italic;
+    text-indent: 5px;
+    color: burlywood;
 }
 
 #sidebar {
@@ -53,7 +207,6 @@ h2 {
 
 #content {
     float: left;
-    width: 80%;
     padding: 0 2% 0 2%;
 }
 
