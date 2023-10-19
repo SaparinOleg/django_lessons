@@ -3,13 +3,14 @@
 {% block title %} Home page {% endblock %}
 {% block content %}
 
-<div>
-    {% for topic in topics %}
-        {% if forloop.counter != 1 %} | {% endif %}
-        <a class="remove-link-style" href="{{ topic.get_absolute_url }}">
-            {{ topic }}
-        </a>
-    {% endfor %}
-    {% include "main/post/article_list.html" %}
-</div>
+    <div class="topics-container">
+        {% for topic in topics %}
+            {% if forloop.counter != 1 %} | {% endif %}
+                <a class="remove-link-style" href="{% url 'main:home_page' %}?topic_id={{ topic.id }}">
+                    {{ topic }}
+                </a>
+        {% endfor %}
+        {% include "main/post/article_list.html" %}
+    </div>
+
 {% endblock %}

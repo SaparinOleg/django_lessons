@@ -21,7 +21,7 @@ h2 {
     color: rgb(108, 159, 176);
     font-size: 30px;
     font-weight: 500;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
 }
 
 .remove-link-style {
@@ -182,7 +182,7 @@ h2 {
 
 .published {
     font-size: 12px;
-    font-weight: lighter;   
+    font-weight: lighter;
     font-style: italic;
     text-indent: 5px;
     color: burlywood;
@@ -191,7 +191,7 @@ h2 {
 
 .commented {
     font-size: 12px;
-    font-weight: lighter;   
+    font-weight: lighter;
     font-style: italic;
     text-indent: 5px;
     color: burlywood;

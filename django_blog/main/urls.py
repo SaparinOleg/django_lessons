@@ -10,7 +10,6 @@ from .views import (
     register_account,
     login,
     logout,
-    show_topic,
     subscribe_topic,
     unsubscribe_topic,
     show_user_profile,
@@ -32,7 +31,6 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
     path('create/', create_article, name='create_article'),
-    path('topic/<int:topic_id>', show_topic, name='topic'),
     path('topics/<int:topic_id>/subscribe/', subscribe_topic, name='subscribe'),
     path('topics/<int:topic_id>/unsubscribe/', unsubscribe_topic, name='unsubscribe'),
     path('profile/<str:username>/', show_user_profile, name='username'),
@@ -42,5 +40,5 @@ urlpatterns = [
     path('<int:article_id>/update/', update_article, name='update'),
     path('<int:article_id>/delete/', delete_article, name='delete'),
     re_path(r'^archive/(?P<year>\d{4})/(?P<month>\d{1,2})/$', show_archive, name='archive'),
-    re_path(r'^.*/$', teapot),
+    re_path(r'^.*/$', teapot, name='teapot'),
 ]
