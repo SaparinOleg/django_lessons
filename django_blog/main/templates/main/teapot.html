@@ -4,15 +4,18 @@
 
 <head>
     <title>I'm a teapot</title>
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet"/>
 </head>
 
 <body>
-    {% block content %}
-    <div class="align-center-container" class="teapot">
-        <img src="{% static 'img/teapot.jpg' %}" alt="no image" />
+
+{% block content %}
+
+    <div class="align-center-container">
+        <img class="img-teapot" src="{% static 'img/teapot.png' %}" alt="no image"/>
     </div>
-    {% endblock %}
+
+{% endblock %}
 </body>
 
 </html>

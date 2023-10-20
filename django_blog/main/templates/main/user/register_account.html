@@ -2,7 +2,11 @@
 
 {% block title %} Registration {% endblock %}
 {% block content %}
-<p>
-    Register account
-</p>
+
+    <form method="post" action="{% url 'main:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="register">
+    </form>
+
 {% endblock %}

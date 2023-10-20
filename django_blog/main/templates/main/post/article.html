@@ -5,37 +5,46 @@
 
     {% for topic in topics %}
         {% if forloop.counter != 1 %} | {% endif %}
-        <a class="remove-link-style" href="{{ topic.get_absolute_url }}">
+        <a class="remove-link-style" href="{% url 'main:home_page' %}?topic_id={{ topic.id }}">
             {{ topic }}
         </a>
     {% endfor %}
 
-<div>
-    <h2>
-    {{ article.title }} #{{ article.pk }}
-    </h2>
+    <div>
+        <h2>
+            {{ article.title }} #{{ article.pk }}
+        </h2>
+        <br>
+        {{ article.content|linebreaksbr }}
+    </div>
     <br>
-    {{ article.content|linebreaksbr }}
-</div>
-<br>
 
-<div class="comments-title"> Comments: </div>
-<div class="comments-container">
-    {% for comment in comments %}
-        <div class="comment-block">
-            <div class="comment-avatar">
-                <div class="comment-letter">A</div>
-            </div>
-            <div class="comment-group-padding">
-                <div class="comment-author-date">
-                    <span class="comment-author"> {{ comment.author }} </span>
-                    <span class="comment-date"> {{ comment.created }} </span>
+    <div class="comments-title"> Comments:</div>
+    <form method="POST" action="{% url 'main:add_comment' article.pk%}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit"> Send </button>
+    </form>
+
+    <div class="comments-container">
+        {% for comment in comments %}
+            <div class="comment-block">
+                <div class="comment-avatar">
+                    <div class="comment-letter"> {{ comment.author.username|slice:'1'|capfirst }} </div>
                 </div>
-            <div class="comment-contents">
-                {{ comment.message }}
+                <div class="comment-group-padding">
+                    <div class="comment-author-date">
+                        <span class="comment-author"> {{ comment.author }} </span>
+                        <span class="comment-date"> {{ comment.created }} </span>
+                    </div>
+                    <div class="comment-contents">
+                        {{ comment.message }}
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
+
+    <br>
+
 {% endblock %}
