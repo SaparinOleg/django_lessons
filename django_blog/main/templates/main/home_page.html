@@ -2,7 +2,15 @@
 
 {% block title %} Home page {% endblock %}
 {% block content %}
-<p>
-    Welcome to my first web-site
-</p>
+
+    <div class="topics-container">
+        {% for topic in topics %}
+            {% if forloop.counter != 1 %} | {% endif %}
+                <a class="remove-link-style" href="{% url 'main:home_page' %}?topic_id={{ topic.id }}">
+                    {{ topic }}
+                </a>
+        {% endfor %}
+        {% include "main/post/article_list.html" %}
+    </div>
+
 {% endblock %}

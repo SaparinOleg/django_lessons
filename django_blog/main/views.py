@@ -1,8 +1,11 @@
-from random import randint
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.urls import reverse
 from http import HTTPStatus
+from random import choice as rnd_choice
+from django.core.exceptions import ObjectDoesNotExist
+
+from .models import Article, Comment, Topic
 
 
 def teapot(request):
@@ -10,20 +13,38 @@ def teapot(request):
 
 
 def show_home_page(request):
-    return render(request, 'main/home_page.html')
+    topic_id = request.GET.get('topic_id')
+    if topic_id:
+        topics = Topic.objects.filter(pk=topic_id)
+        articles = topics.first().articles.all()
+    else:
+        topics = Topic.objects.all()
+        articles = Article.objects.all()
+    return render(request,
+                  'main/home_page.html',
+                  {'articles': articles, 'topics': topics})
 
 
 def show_about(request):
     return render(request, 'main/about.html')
 
 
-def article(request):
-    article_id = randint(1, 100)
-    return redirect(f'/article/{article_id}')
+def random_article(request):
+    article_id = rnd_choice(Article.objects.all()).pk
+    return redirect(reverse('main:article', kwargs={"article_id": article_id}))
 
 
 def show_article(request, article_id):
-    return render(request, 'main/post/article.html', {"id": article_id})
+    # article = get_object_or_404(Article, pk=article_id)
+    try:
+        article = Article.objects.get(pk=article_id)
+        comments = article.comments.all()
+        topics = article.topics.all()
+        return render(request,
+                      'main/post/article.html',
+                      {'article': article, 'comments': comments, 'topics': topics})
+    except ObjectDoesNotExist:
+        return redirect(reverse('main:teapot'))
 
 
 def add_comment(request, article_id):
@@ -40,10 +61,6 @@ def update_article(request, article_id):
 
 def delete_article(request, article_id):
     return render(request, 'main/post/delete_article.html')
-
-
-def show_topics(request):
-    return render(request, 'main/topic/topic_list.html')
 
 
 def subscribe_topic(request, topic):
