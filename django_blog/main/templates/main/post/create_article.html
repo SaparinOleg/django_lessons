@@ -2,7 +2,11 @@
 
 {% block title %} Create article {% endblock %}
 {% block content %}
-<p>
-    New article
-</p>
+
+    <form method="POST" action="{% url 'main:create_article' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="post">
+    </form>
+
 {% endblock %}

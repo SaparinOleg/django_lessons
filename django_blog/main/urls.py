@@ -8,8 +8,7 @@ from .views import (
     set_password,
     deactivate_account,
     register_account,
-    login,
-    logout,
+    logout_view,
     subscribe_topic,
     unsubscribe_topic,
     show_user_profile,
@@ -18,7 +17,8 @@ from .views import (
     delete_article,
     show_archive,
     teapot,
-    )
+    login_view,
+)
 
 app_name = 'main'
 
@@ -28,8 +28,8 @@ urlpatterns = [
     path('set-password/', set_password, name='set_password'),
     path('deactivate/', deactivate_account, name='deactivate_account'),
     path('register/', register_account, name='register'),
-    path('login/', login, name='login'),
-    path('logout/', logout, name='logout'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('create/', create_article, name='create_article'),
     path('topics/<int:topic_id>/subscribe/', subscribe_topic, name='subscribe'),
     path('topics/<int:topic_id>/unsubscribe/', unsubscribe_topic, name='unsubscribe'),
